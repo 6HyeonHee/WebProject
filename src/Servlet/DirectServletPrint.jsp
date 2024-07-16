@@ -12,7 +12,7 @@
 	컨텍스트루트를 제외한 상태경로로 링크를 생성한다.
 	그리고 전송방식은 post로 지정한다.
 	 -->
-	<form method="post" action="../function/DirectServletPrint.do">
+	<form method="post" action="DirectServletPrint.do">
 		<input type="submit" value="바로가기" />
 	</form>
 </body>

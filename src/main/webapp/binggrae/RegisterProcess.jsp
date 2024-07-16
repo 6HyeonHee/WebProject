@@ -13,6 +13,8 @@ String name = request.getParameter("name");
 String email = request.getParameter("email");
 String phone = request.getParameter("phone");
 
+
+
 // 폼값을 DTO에 저장
 MemberDTO2 dto = new MemberDTO2();
 dto.setId(id);
@@ -31,7 +33,7 @@ dao.close();
 
 if (iResult == 1) {
 	// 회원가입에 성공하면 로그인 페이지로
-	response.sendRedirect("../login.jsp");
+	response.sendRedirect("login.jsp");
 } else {
 	// 실패했다면 경고창을 띄우고 뒤로 이동한다.
 	JSFunction2.alertBack("회원가입에 실패하였습니다.", out);

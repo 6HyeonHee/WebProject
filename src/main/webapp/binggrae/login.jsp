@@ -390,8 +390,7 @@
       <div class="contents">
         <div class="inner">
           <div class="login_area">
-          
-            <h2>ID 로그인</h2>
+            
             <span style="color: red; font-size:1.2em;">
             	<%= request.getAttribute("LoginErrMsg") == null ?
             			"" : request.getAttribute("LoginErrMsg") %>
@@ -402,6 +401,7 @@
 			%>
 			<!-- 로그인 폼의 입력값을 서버로 전송하기 전에 검증하기 위해 정의한 함수.
 			입력값이 빈값인지 확인하여 경고창을 띄워준다. -->
+			<h2>ID 로그인</h2>
 			<script>
 		
 			function validateForm(form) {
@@ -419,15 +419,16 @@
 					return false;
 				}
 			}
-		</script>
-            <form>
+			</script>
+            <form action="LoginProcess.jsp" method="post" name="loginFrm"
+            	onsubmit="return validateForm(this);">
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">
-                  <input type="text" placeholder="아이디">
+                  <input type="text" name="user_id" placeholder="아이디">
                 </div>
                 <div class="row input_wrap2">
-                  <input type="password" placeholder="비밀번호">
+                  <input type="password" name="user_pw" placeholder="비밀번호">
                 </div>
                 <div class="row row3">
                   <div class="checkbox_wrap">
@@ -436,26 +437,36 @@
                   </div>
                 </div>
                 <input type="submit" class="login_btn" value="로그인" />
+            
+	            <ul class="link_wrap">
+	            <li><a href="forgot-password.jsp">비밀번호 찾기</a></li>
+	            <li><a href="#">아이디 찾기</a></li>
+	            <li><a href="register.jsp">회원가입</a></li>
+	          	</ul>
               </fieldset>
             </form>
             <%
 			} else { // 로그인된 상태
-				/*
-				session영역에 속성값이 있다면 로그인에 성공한 상태이므로 회원의
-				이름과 로그아웃 버튼을 출력한다.
-				*/
 			%>
-				<%= session.getAttribute("UserName") %> 회원님, 로그인하셨습니다.<br />
-				<a href="Logout.jsp">[로그아웃]</a>
+
+            <h2>마이페이지</h2>
+			<form>
+              <fieldset>
+                <!-- <legend>마이페이지</legend> -->
+                <%= session.getAttribute("UserName") %>님, 
+                <a href=reset.jsp class="reset_btn">
+                	<span class="blind">내정보 수정</span>
+                </a>
+                <br />
+                <a href="logout.jsp" class="login_btn">
+                	로그아웃           
+                </a>
+              </fieldset>
+            </form>
 			<%
 			}
 			%>
-          </div>
-          <ul class="link_wrap">
-            <li><a href="forgot-password.jsp">비밀번호 찾기</a></li>
-            <li><a href="#">아이디 찾기</a></li>
-            <li><a href="register.jsp">회원가입</a></li>
-          </ul>
+			</div>    
         </div>
       </div>
     </main>

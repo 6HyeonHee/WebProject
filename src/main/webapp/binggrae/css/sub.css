@@ -110,6 +110,25 @@
   color: var(--gray-400);
 }
 
+.login_page .login_area h2 {
+	font-size: 20px
+}
+.login_page .login_area  fieldset {
+	margin-top : 10px;
+	position: relative;
+}
+
+.login_page .login_area .reset_btn {
+	position: absolute;
+	display: block;
+	width: 15px;
+	height : 15px;
+	left: 60px;
+	top: 0;
+
+	background: url(../images/common/setting_icon.png)no-repeat 50% 50% / cover;
+} 
+
 /* 서브 페이지 제목 공통 */
 .sub_container {
   margin: 0 auto;
@@ -225,6 +244,23 @@
   mask: url(../images/write_btn.png)no-repeat 50% 50%;
   background: #fff;
   margin-left: 10px;
+}
+
+/* 회원가입 페이지 */
+.card form .form-group {
+	position: relative;
+}
+.card form .form-group>.id_check_btn {
+	display: block;
+	border: none;
+	border-radius: 20px;
+	height: 40px;
+	width: 100px;
+	position:absolute;
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #f0f0f0;
 }
 
 

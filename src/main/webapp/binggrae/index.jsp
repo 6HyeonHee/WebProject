@@ -159,9 +159,13 @@
               </ul>
             </div>
             <div class="login">
-            <% if (session.getAttribute("UserId") == null %>
+            <% if (session.getAttribute("UserId") == null) { %>
               <a class="login_btn" href="login.jsp">
                 <span class="blind">로그인</span>
+              </a>
+            <% } else { %>
+              <a class="login_btn" href="login.jsp">
+                <span class="blind">마이페이지</span>
               </a>
             <% } %>
              
