@@ -14,7 +14,6 @@ String email = request.getParameter("email");
 String phone = request.getParameter("phone");
 
 
-
 // 폼값을 DTO에 저장
 MemberDTO2 dto = new MemberDTO2();
 dto.setId(id);

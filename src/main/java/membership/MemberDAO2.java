@@ -65,9 +65,13 @@ public class MemberDAO2 extends JDBConnect2 {
     //아이디 중복확인을 위한 메서드
     public int CheckId(String uid) {
     	
-    	int result=0;
+    	if (uid == null || uid.trim().isEmpty()) {
+            return -1; // Return -1 for empty input
+        }
     	
-    	String query = "SELECT * FROM member WHERE id=?";
+    	int result=-1; // 오류 발생
+    	
+    	String query = " SELECT * FROM member WHERE id=? ";
     	
     	try {
     		
@@ -78,8 +82,10 @@ public class MemberDAO2 extends JDBConnect2 {
 	    	
 	    	if(rs.next()) {
 				result=1; // 존재할 경우
+				System.out.println("이미 아이디가 존재함");
 	    	} else {
-	    		result=0;
+	    		result=0; // 존재하지 않을 경우
+	    		System.out.println("사용가능한 아이디임");
 	    	}
 	    	rs.close();
 	    	psmt.close();
