@@ -111,22 +111,38 @@
 }
 
 .login_page .login_area h2 {
-	font-size: 20px
+	font-size: 30px;
 }
 .login_page .login_area  fieldset {
 	margin-top : 10px;
-	position: relative;
+	
 }
 
-.login_page .login_area .reset_btn {
-	position: absolute;
-	display: block;
-	width: 15px;
-	height : 15px;
-	left: 60px;
-	top: 0;
+.login_page .login_area p {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.login_page .login_area .mypage_btn {
+	display: flex;
+	gap: 0 8px;
+}
 
-	background: url(../images/common/setting_icon.png)no-repeat 50% 50% / cover;
+/* 정보 수정 버튼 */
+
+.login_page .login_area .reset_btn {
+	width: 70px;
+	height: 20px;
+	border: 1px solid var(--point-color1);
+	border-radius: 8px;
+	text-align: center;
+}
+
+.login_page .login_area .delete_btn {
+	width: 70px;
+	height: 20px;
+	border: 1px solid var(--point-color1);
+	border-radius: 8px;
+	text-align: center;
 } 
 
 /* 서브 페이지 제목 공통 */
@@ -261,6 +277,12 @@
 	top: 50%;
 	transform: translateY(-50%);
 	background: #f0f0f0;
+}
+
+/* 정보수정 페이지 */
+.user .setting_btn .set_btn{
+	display: block;
+	margin-bottom: 10px;
 }
 
 

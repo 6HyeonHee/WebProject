@@ -85,18 +85,37 @@ function validateForm(form) {  // 폼 내용 검증
         alert("비밀번호가 다릅니다.");
         return false;
     }
-    /* 실행X */
-    if (form.duplication.value != idCheck) {
-    	alert("아이디 중복확인을 해주세요");
+    
+    if (idCheck == false) {
+        alert("아이디 중복확인을 해주세요");
         return false;
     }
+    
 }
 
 function submit2(frm) { //폼에서 액션 경로를 여러개 사용하기 위한 함수
-	frm.action = 'IdCheck.jsp'; //두번째로 보낼 경로 아이디 중복 체크하는 부분
-	frm.submit();
-	return false;
+	var id = frm.id.value;
+
+    $.ajax({
+        url: 'IdCheck.jsp',
+        type: 'POST',
+        data: { id: id },
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === "error") {
+                alert(response.message);
+                idCheck = false; // 중복 확인 실패
+            } else {
+                alert(response.message);
+                idCheck = true; // 중복 확인 성공
+            }
+        },
+        error: function() {
+            alert("아이디 중복 확인에 실패했습니다.");
+        }
+    });
 }
+
 
 const autoHypen = (target) => {
 	target.value = target.value
@@ -104,6 +123,8 @@ const autoHypen = (target) => {
     .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/g, "$1-$2-$3")
     .replace(/(\-{1,2})$/g, "");
 }
+
+
 
 
 </script>
@@ -141,9 +162,7 @@ const autoHypen = (target) => {
                                 <div class="form-group">
                                     <input type="text" name="id" class="form-control form-control-user" 
                                         id="exampleInputId" placeholder="6-12자리의 아이디를 입력하세요">
-                                    <button type="button" onclick="return submit2(this.form);" name="CheckId" class="id_check_btn">중복확인</button>
-                                    <!-- 아이디 중복 여부 확인 -->
-                                    <input type="hidden" id="con" value="0">
+                                    <button type="button" onclick="submit2(this.form);" name="idCheck" class="id_check_btn">중복확인</button>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -155,10 +174,7 @@ const autoHypen = (target) => {
                                             id="exampleRepeatPassword" placeholder="비밀번호 확인">
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-user btn-block" 
-                                	value="회원가입" />
-                                	
-
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="회원가입" />
                             </form>
                             <hr>
                             <div class="text-center">

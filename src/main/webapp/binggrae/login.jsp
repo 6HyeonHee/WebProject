@@ -452,11 +452,15 @@
             <h2>마이페이지</h2>
 			<form>
               <fieldset>
-                <!-- <legend>마이페이지</legend> -->
-                <%= session.getAttribute("UserName") %>님, 
-                <a href=reset.jsp class="reset_btn">
-                	<span class="blind">내정보 수정</span>
-                </a>
+                <p><%= session.getAttribute("UserName") %>님, </p>
+                <div class=mypage_btn>
+	                <a href=setting.jsp class="reset_btn">
+	                	정보수정
+	                </a>
+	                <a href=deleteMember.jsp class="delete_btn">
+	                	회원탈퇴
+	                </a>
+                </div>
                 <br />
                 <a href="logout.jsp" class="login_btn">
                 	로그아웃           

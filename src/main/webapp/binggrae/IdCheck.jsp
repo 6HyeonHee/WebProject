@@ -7,30 +7,18 @@
     String id = request.getParameter("id");
     ServletContext appcontext = getServletContext();
     MemberDAO2 dao = new MemberDAO2(application);
-    int result = dao.CheckId(id);
+	int result = dao.CheckId(id);
+    
+    response.setContentType("application/json");
+    String jsonResponse;
+
+    if (result == -1) {
+        jsonResponse = "{\"status\": \"error\", \"message\": \"아이디를 작성해주세요\"}";
+    } else if (result == 1) {
+        jsonResponse = "{\"status\": \"error\", \"message\": \"이미 존재하는 아이디 입니다.\"}";
+    } else {
+        jsonResponse = "{\"status\": \"success\", \"message\": \"사용가능한 아이디 입니다.\"}";
+    }
+
+    out.print(jsonResponse);
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<% if (result == -1) { %>
-    <script>
-    alert('아이디를 작성해주세요');
-    history.back();
-    </script>
-    <% } else if (result == 1) { %>
-    <script>
-    alert('중복입니다.');
-    history.back();
-    </script>
-    <% } else { %>
-    <script>
-    alert('사용가능한 아이디 입니다.');
-    history.back();
-    </script>
-    <% } %>
-</body>
-</html>
