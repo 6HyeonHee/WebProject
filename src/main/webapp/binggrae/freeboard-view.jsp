@@ -123,7 +123,7 @@ function deletePost() {
                 <a href="/news/news_home">뉴스룸</a>
                 <ul class="depth2">
                   <li><a href="/news/news_new">새소식</a></li>
-                  <li><a href="/news/news_announced">보도자료</a></li>
+                  <li><a href="../databoard/list.do">보도자료</a></li>
                   <li><a href="/news/news_story">빙그레 스토리</a></li>
                   <li><a href="/news/media_sound" style="white-space: normal; word-break: keep-all;">미디어 <br>라이브러리</a>
                   </li>
@@ -278,7 +278,7 @@ function deletePost() {
                 <ul class="depth2">
                   <li><a href="/news/news_home">전체보기</a><span class="circle"></span></li>
                   <li><a href="/news/news_new">새소식</a><span class="circle"></span></li>
-                  <li><a href="/news/news_announced">보도자료</a><span class="circle"></span></li>
+                  <li><a href="../databoard/list.do">보도자료</a><span class="circle"></span></li>
                   <li><a href="/news/news_story">빙그레 스토리</a><span class="circle"></span></li>
                   <li><a href="/news/media_sound">미디어 라이브러리</a><span class="circle"></span></li>
                 </ul>
@@ -361,7 +361,7 @@ function deletePost() {
               <ul class="ham_depth2">
                 <li><a href="#">전체보기</a></li>
                 <li><a href="#">새소식</a></li>
-                <li><a href="#">보도자료</a></li>
+                <li><a href="../databoard/list.do">보도자료</a></li>
                 <li><a href="#">빙그레스토리</a></li>
                 <li><a href="#">미디어라이브러리</a></li>
               </ul>

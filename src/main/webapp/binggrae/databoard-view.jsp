@@ -1,8 +1,45 @@
+
+<%@page import="freeboard.FreeBoardDTO"%>
+<%@page import="utils.CookieManager"%>
+<%@page import="freeboard.FreeBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../binggrae/inc/main_header.jsp" %> <!-- 헤드 코드 -->
+<%
+// 파라미터로 전달된 게시물의 일련번호를 받아온다.
+String idx = request.getParameter("idx");
+// DAO 인스턴스 생성
+FreeBoardDAO dao = new FreeBoardDAO();
 
+String ckValue = CookieManager.readCookie(request, "board-"+ idx);
+if(!ckValue.equals("read")) {
+	CookieManager.makeCookie(response, "board-"+idx, "read", 1000);
+	dao.updateVisitCount(idx);
+}
+
+
+// 출력할 게시물 인출
+FreeBoardDTO dto = dao.selectView(idx);
+// DB 연결 해제
+dao.close();
+%>
+<script>
+
+//게시물 삭제를 위해 정의한 함수
+function deletePost() {
+
+ var confirmed = confirm("정말로 삭제하겠습니까?"); 
+ if (confirmed) {
+
+     var form = document.writeFrm;
+
+     form.method = "post"; 
+     form.action = "../freeboard/delete.do"; 
+     form.submit();
+ }
+}
+ </script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문바로가기</a>
@@ -77,8 +114,8 @@
                 <ul class="depth2">
                   <li><a href="/investment/invest_finance">재무정보</a></li>
                   <li><a href="/investment/stocks">주식정보</a></li>
-                  <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
-                  <li><a class="active" href="../freeboard/list.do">공시정보</a></li>
+                  <li><a class="active" href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
+                  <li><a href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="/investment/ir">IR자료실</a></li>
                 </ul>
               </li>
@@ -366,98 +403,71 @@
         </div>
       </div>
       <div class="contents">
+<form name="writeFrm" method="post">
+    <input type="hidden" name="idx" value="${dto.idx}">
         <div class="inner">
-<!-- 검색폼 -->
-<form method="get">
-            <fieldset>
-              <legend>게시물 검색</legend>
-              <div class="board_top">
-                <div class="board_search">
-                  <div class="select_wrap">
-                    <select>
-                      <option>전체</option>
-                      <option value="title">제목</option>
-                      <option value="content">내용</option>
-                    </select>
-                  </div>
-                  <div class="search_wrap">
-                    <input type="search" placeholder="검색어를 입력해주세요">
-                    <input class="search_btn" type="submit" value="">
-                  </div>
-                </div>
-                <p>총 40건</p>
+          <div class="board_view">
+            <div class="board_box">
+              <div class="view_tit">
+                <h3>${ dto.title }</h3>
+                <span class="date">${ dto.postdate }</span>
               </div>
-            </fieldset>
-</form>
-
-<!-- 목록 테이블 -->
-          <div class="board_list">
-            <table>
-              <caption>투자정보 테이블</caption>
-              <thead>
-                <tr>
-                  <th class="col1">NO.</th>
-                  <th class="col2">제목</th>
-                  <th class="col3">작성자</th>
-                  <th class="col4">조회수</th>
-                  <th class="col5">작성일</th>
-                  <th class="col6">다운로드</th>
-                </tr>
-              </thead>
-              <tbody>
-<!-- 검색어 조건에 따라 게시물이 있는지 확인하기 위해 choose태그 사용 -->
-<c:choose>
-	<c:when test="${ empty freeboardLists }">
-		<!-- List에 저장된 레코드가 없는 경우 -->
-		<tr>
-            <td colspan="6" align="center">
-                등록된 게시물이 없습니다^^*
-            </td>
-        </tr>
-	</c:when>
-	<c:otherwise>
-		<!-- 저장된 게시물이 있다면 갯수만큼 반복해서 출력한다. 
-		items 속성에는 반복가능한 객체를 기술하고, 순서대로 추출된 데이터는
-		var 속성에 지정한 변수로 저장된다.-->           
-		<c:forEach items="${ freeboardLists }" var="row" varStatus="loop">
-        <tr align="center">
-        	<!-- 가상 번호 -->
-            <td> 
-				${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }
-			</td>
-            <td align="left">
-                <a href="../freeboard/view.do?idx=${ row.idx }">
-                	${ row.title } </a>
-            </td> 
-            <td>${ row.id }</td>
-            <td>${ row.visitcount }</td>
-            <td>${ row.postdate }</td>
-            <td>
-            <!-- 다운로드 링크는 첨부파일이 있을 떄만 표시한다. -->
-            <c:if test="${ not empty row.ofile }">
-            	<a href="../freeboard/download.do?ofile=${ row.ofile }
-            	&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
-            </c:if>
-            </td>
-        </tr>
-        </c:forEach>
-    </c:otherwise>
-</c:choose>
-              </tbody>
-            </table>
-          </div>
-          <div class="board_write_btn">
-            <a href="../freeboard/write.do">글쓰기</a>
-          </div>
-          <div class="board_pagination">
-            <div class="pagination_wrap">
-              <ul class="pagination">
-                <!-- 페이지 바로가기 링크 출력 -->
-                ${ map.pagingImg }
-              </ul>
+              <div class="view_con">
+                ${ dto.content }
+                <c:if test="${ not empty dto.ofile }">
+                	<br /><br /><br />
+                	${ ext }
+					<c:choose>
+						<c:when test='${ ext == ".png" or ext == ".gif" or ext == ".jpg" }'>
+							<img src="../binggrae/Uploads/${ dto.sfile }" style="max-width:600px;" />
+						</c:when>
+						<c:when test='${ ext == ".mp3" or ext == ".wav" }'>
+							<audio src="../binggrae/Uploads/${ dto.sfile }" controls="controls"></audio>
+						</c:when>
+						<c:when test='${ ext == ".mp4" or ext == ".avi" or ext == ".wmv" }'>
+							<video src="../binggrae/Uploads/${ dto.sfile }" style="max-width:600px;" autoplay="autoplay"></video>
+						</c:when>
+						<c:otherwise>
+							<a href="../databoard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">[다운로드]</a>
+						</c:otherwise>
+					</c:choose>       	
+        		</c:if>
+              </div>
+              <tr>
+		        <td>첨부파일 : </td>
+		        <td>
+              	<!-- 글 작성시 첨부파일은 필수사항이 아니므로 첨부한 경우에만 다운로드 링크를 화면에 출력한다. -->
+<c:if test="${ not empty dto.ofile }">
+	${ dto.ofile }
+	<a href="../freeboard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
+	    [다운로드]
+	</a>
+</c:if>
+		        	
+		        </td>
+		        <td>다운로드수 : </td>
+		        <td>${ dto.downcount }</td>
+    		  </tr> 
+            </div>
+    <div class="btn_wrap">
+<%
+    String UserId = (String) session.getAttribute("UserId");
+%>
+<c:if test="${ UserId != null && UserId != '' && UserId == dto.id }">
+        <button type="button" class="content_btn"
+            onclick="location.href='../freeboard/edit.do?mode=edit&idx=${param.idx}';">
+            수정하기
+        </button>
+        <button type="button" class="content_btn"
+            onclick="deletePost()">
+            삭제하기
+        </button>
+</c:if>
+              <a class="point_btn3" href="../freeboard/list.do">목록</a>
             </div>
           </div>
         </div>
+</form>
       </div>
     </main>
     <!-- 푸터 -->
@@ -500,10 +510,10 @@
               </li>
               <li>
                 <a href="https://www.youtube.com/channel/UCOmz8eDBQ04h6i0_8p_V7eg" target="_blank"><img
-                    src="../binggrae/images/footer_sns02.png" alt=""></a>
+                    src="binggrae/../binggrae/images/footer_sns02.png" alt=""></a>
               </li>
               <li>
-                <a href="https://www.tftmall.co.kr/main/index.php" target="_blank"><img src="../binggrae/images/footer_sns03.png"
+                <a href="https://www.tftmall.co.kr/main/index.php" target="_blank"><img src="binggrae/../binggrae/images/footer_sns03.png"
                     alt=""></a>
               </li>
             </ul>
