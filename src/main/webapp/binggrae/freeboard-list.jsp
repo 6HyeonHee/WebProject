@@ -31,7 +31,7 @@
         </section>
         <section class="header_bottom">
           <h1 class="logo">
-            <a href="index.jsp">
+            <a href="../binggrae/index.jsp">
               <span class="blind">빙그레</span>
             </a>
           </h1>
@@ -77,8 +77,8 @@
                 <ul class="depth2">
                   <li><a href="/investment/invest_finance">재무정보</a></li>
                   <li><a href="/investment/stocks">주식정보</a></li>
-                  <li><a class="active" href="invest-aanouce-list.jsp">전자공고</a></li>
-                  <li><a href="../freeboard/list.do">공시정보</a></li>
+                  <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
+                  <li><a class="active" href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="/investment/ir">IR자료실</a></li>
                 </ul>
               </li>
@@ -116,7 +116,7 @@
               </ul>
             </div>
             <div class="login">
-              <a class="login_btn" href="login.jsp">
+              <a class="login_btn" href="../binggrae/login.jsp">
                 <span class="blind">로그인</span>
               </a>
             </div>
@@ -228,7 +228,7 @@
                 <ul class="depth2">
                   <li><a href="/investment/invest_finance">재무정보</a><span class="circle"></span></li>
                   <li><a href="/investment/stocks">주식정보</a><span class="circle"></span></li>
-                  <li><a href="invest-aanouce-list.jsp">전자공고</a><span class="circle"></span></li>
+                  <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a><span class="circle"></span></li>
                   <li><a href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="/investment/ir">IR자료실</a><span class="circle"></span></li>
                 </ul>
@@ -315,7 +315,7 @@
               <ul class="ham_depth2">
                 <li><a href="#">재무정보</a></li>
                 <li><a href="#">주식정보</a></li>
-                <li><a href="invest-aanouce-list.jsp">전자공고</a></li>
+                <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
                 <li><a href="../freeboard/list.do">공시정보</a></li>
                 <li><a href="#">IR자료실</a></li>
               </ul>
@@ -346,7 +346,7 @@
         <div class="inner">
           <ul class="tit_top">
             <li class="home_icon">
-              <a href="index.jsp"></a>
+              <a href="../binggrae/index.jsp"></a>
             </li>
             <li>투자정보</li>
             <li>전자공고</li>
@@ -358,8 +358,8 @@
             <ul class="tab_list">
               <li><a href="#">재무정보</a></li>
               <li><a href="#">주식정보</a></li>
-              <li class="active"><a href="invest-aanouce-list.jsp">전자공고</a></li>
-              <li><a href="#">공시정보</a></li>
+              <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
+              <li class="active"><a href="../freeboard/list.do">공시정보</a></li>
               <li><a href="#">IR자료실</a></li>
             </ul>
           </div>

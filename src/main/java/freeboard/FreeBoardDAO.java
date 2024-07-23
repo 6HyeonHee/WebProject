@@ -205,8 +205,10 @@ public class FreeBoardDAO extends DBConnPool2 {
 			*/
 			String sql = "SELECT COUNT(*) FROM mvcboard WHERE id=? AND idx=?";
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, id);
-			psmt.setString(2, idx);
+			
+			FreeBoardDTO dto = new FreeBoardDTO();
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getIdx());
 			rs = psmt.executeQuery();
 			// count() 함수는 항상 결과가 있으므로 조건문 없이 호출한다.
 			rs.next();
@@ -227,8 +229,10 @@ public class FreeBoardDAO extends DBConnPool2 {
 		int result = 0;
 		try {
 			String query = "DELETE FROM freeboard WHERE idx=?";
+			
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, idx);
+			
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("게시물 삭제 중 예외 발생");
@@ -243,16 +247,16 @@ public class FreeBoardDAO extends DBConnPool2 {
 		try {
 			// 수정을 위한 update 쿼리문 작성
 			String query = "UPDATE freeboard "
-					+ " SET title=?, content=?, id=?, ofile=?, sfile=? "
+					+ " SET title=?, content=?, ofile=?, sfile=? "
 					+ " WHERE idx=?";
 			
 			// prepared 인스턴스 생성 및 인파라미터 설정
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getId());
-			psmt.setString(4, dto.getOfile());
-			psmt.setString(5, dto.getSfile());
+			psmt.setString(3, dto.getOfile());
+			psmt.setString(4, dto.getSfile());
+			psmt.setString(5, dto.getIdx());
 			
 			result = psmt.executeUpdate();
 			
@@ -262,7 +266,4 @@ public class FreeBoardDAO extends DBConnPool2 {
 		}
 		return result;
 	}
-	
-	
-	
 }

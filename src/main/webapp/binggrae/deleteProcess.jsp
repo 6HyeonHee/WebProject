@@ -29,7 +29,7 @@ if(result == -1) {
 %>
 	<script type="text/javascript">
 		alert("탈퇴되었습니다.");
-		location.href="index.jsp";
+		location.href="../binggrae/index.jsp";
 	</script>
 <%
 }

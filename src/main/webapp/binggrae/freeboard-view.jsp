@@ -1,7 +1,45 @@
+
+<%@page import="freeboard.FreeBoardDTO"%>
+<%@page import="utils.CookieManager"%>
+<%@page import="freeboard.FreeBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../binggrae/inc/main_header.jsp" %> <!-- 헤드 코드 -->
+<%
+// 파라미터로 전달된 게시물의 일련번호를 받아온다.
+String idx = request.getParameter("idx");
+// DAO 인스턴스 생성
+FreeBoardDAO dao = new FreeBoardDAO();
 
+String ckValue = CookieManager.readCookie(request, "board-"+ idx);
+if(!ckValue.equals("read")) {
+	CookieManager.makeCookie(response, "board-"+idx, "read", 1000);
+	dao.updateVisitCount(idx);
+}
+
+
+// 출력할 게시물 인출
+FreeBoardDTO dto = dao.selectView(idx);
+// DB 연결 해제
+dao.close();
+%>
+<script>
+
+//게시물 삭제를 위해 정의한 함수
+function deletePost() {
+
+ var confirmed = confirm("정말로 삭제하겠습니까?"); 
+ if (confirmed) {
+
+     var form = document.writeFrm;
+
+     form.method = "post"; 
+     form.action = "../freeboard/delete.do"; 
+     form.submit();
+ }
+}
+ </script>
 <body>
   <div id="skip_navi">
     <a href="#container">본문바로가기</a>
@@ -30,7 +68,7 @@
         </section>
         <section class="header_bottom">
           <h1 class="logo">
-            <a href="index.jsp">
+            <a href="../binggrae/index.jsp">
               <span class="blind">빙그레</span>
             </a>
           </h1>
@@ -76,7 +114,7 @@
                 <ul class="depth2">
                   <li><a href="/investment/invest_finance">재무정보</a></li>
                   <li><a href="/investment/stocks">주식정보</a></li>
-                  <li><a class="active" href="invest-aanouce-list.jsp">전자공고</a></li>
+                  <li><a class="active" href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
                   <li><a href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="/investment/ir">IR자료실</a></li>
                 </ul>
@@ -115,7 +153,7 @@
               </ul>
             </div>
             <div class="login">
-              <a class="login_btn" href="login.jsp">
+              <a class="login_btn" href="../binggrae/login.jsp">
                 <span class="blind">로그인</span>
               </a>
             </div>
@@ -227,7 +265,7 @@
                 <ul class="depth2">
                   <li><a href="/investment/invest_finance">재무정보</a><span class="circle"></span></li>
                   <li><a href="/investment/stocks">주식정보</a><span class="circle"></span></li>
-                  <li><a href="invest-aanouce-list.jsp">전자공고</a><span class="circle"></span></li>
+                  <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a><span class="circle"></span></li>
                   <li><a href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="/investment/ir">IR자료실</a><span class="circle"></span></li>
                 </ul>
@@ -314,7 +352,7 @@
               <ul class="ham_depth2">
                 <li><a href="#">재무정보</a></li>
                 <li><a href="#">주식정보</a></li>
-                <li><a href="invest-aanouce-list.jsp">전자공고</a></li>
+                <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
                 <li><a href="../freeboard/list.do">공시정보</a></li>
                 <li><a href="#">IR자료실</a></li>
               </ul>
@@ -345,7 +383,7 @@
         <div class="inner">
           <ul class="tit_top">
             <li class="home_icon">
-              <a href="index.jsp"></a>
+              <a href="../binggrae/index.jsp"></a>
             </li>
             <li>투자정보</li>
             <li>전자공고</li>
@@ -357,14 +395,16 @@
             <ul class="tab_list">
               <li><a href="#">재무정보</a></li>
               <li><a href="#">주식정보</a></li>
-              <li class="active"><a href="invest-aanouce-list.jsp">전자공고</a></li>
-              <li><a href="#">공시정보</a></li>
+              <li><a href="../binggrae/invest-aanouce-list.jsp">전자공고</a></li>
+              <li class="active"><a href="../freeboard/list.do">공시정보</a></li>
               <li><a href="#">IR자료실</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="contents">
+<form name="writeFrm" method="post">
+    <input type="hidden" name="idx" value="${dto.idx}">
         <div class="inner">
           <div class="board_view">
             <div class="board_box">
@@ -391,21 +431,25 @@
 		        <td>${ dto.downcount }</td>
     		  </tr> 
             </div>
-<c:if test="${ UserId != null && UserId.toString().equals(dto.getId())}">
-            <div class="btn_wrap">
-            	<button type="button" class="content_btn"
-		            onclick="location.href='../freeboard/edit.do?mode=edit&idx=${ param.idx }';">
-		            수정하기
-		        </button>
-		        <button type="button" class="content_btn"
-		            onclick="deletePost()">
-		            삭제하기
+    <div class="btn_wrap">
+<%
+    String UserId = (String) session.getAttribute("UserId");
+%>
+<c:if test="${ UserId != null && UserId != '' && UserId == dto.id }">
+        <button type="button" class="content_btn"
+            onclick="location.href='../freeboard/edit.do?mode=edit&idx=${param.idx}';">
+            수정하기
+        </button>
+        <button type="button" class="content_btn"
+            onclick="deletePost()">
+            삭제하기
+        </button>
 </c:if>
-		        </button>
               <a class="point_btn3" href="../freeboard/list.do">목록</a>
             </div>
           </div>
         </div>
+</form>
       </div>
     </main>
     <!-- 푸터 -->

@@ -181,7 +181,7 @@ const autoHypen = (target) => {
                                 <a class="small" href="forgot-password.jsp">비밀번호를 잊어버리셨나요?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.jsp">이미 계정이 있다면 로그인하세요!</a>
+                                <a class="small" href="../binggrae/login.jsp">이미 계정이 있다면 로그인하세요!</a>
                             </div>
                         </div>
                     </div>

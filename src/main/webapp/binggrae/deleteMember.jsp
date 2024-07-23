@@ -42,7 +42,7 @@
 String id = (String)session.getAttribute("UserId");
 
 if(id==null) {
-	response.sendRedirect("login.jsp");
+	response.sendRedirect("../binggrae/login.jsp");
 }
 // 해당 회원의 모든 정보를 가져오기
 MemberDAO2 dao = new MemberDAO2(application);

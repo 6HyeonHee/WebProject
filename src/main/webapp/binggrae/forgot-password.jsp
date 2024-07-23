@@ -66,7 +66,7 @@
                                         <a class="small" href="#">|</a>
                                         <a class="small" href="#">아이디 찾기</a>
                                         <a class="small" href="#">|</a>
-                                        <a class="small" href="login.jsp">로그인</a>
+                                        <a class="small" href="../binggrae/login.jsp">로그인</a>
                                     </div>
                                 </div>
                             </div>
