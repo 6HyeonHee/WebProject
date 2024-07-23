@@ -15,8 +15,8 @@ import utils.JSFunction2;
 
 @WebServlet("/databoard/write.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 1,
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 1024 * 1024 * 10,
+		maxRequestSize = 1024 * 1024 * 100
 )
 public class DataWriteCtrl extends HttpServlet {
 
@@ -53,7 +53,7 @@ public class DataWriteCtrl extends HttpServlet {
 			 파일 업로드 시 오류가 발생되면 경고창을 띄운 후 작성페이지로 이동한다.
 			*/
 			JSFunction2.alertLocation(resp, "파일 업로드 오류입니다.",
-					"../mvcboard/write.do");
+					"../databoard/write.do");
 			return;
 		}
 		// 세션에서 사용자 ID 가져오기

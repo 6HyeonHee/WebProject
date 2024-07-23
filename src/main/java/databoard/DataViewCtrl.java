@@ -25,9 +25,11 @@ public class DataViewCtrl extends HttpServlet {
 		if(dto.getContent() != null)
 		dto.setContent(dto.getContent().replaceAll("\r\n", "<br />"));
 		
+		if(dto.getSfile() != null) {
 		// 파일의 확장자만 잘라서 request 영역에 저장
 		String ext = dto.getSfile().substring(dto.getSfile().lastIndexOf("."));
 		req.setAttribute("ext", ext);
+		}
 				
 		// 게시물이 저장된 DTO 객체를 request 영역에 저장하고 JSP로 포워드한다.
 		req.setAttribute("dto", dto);

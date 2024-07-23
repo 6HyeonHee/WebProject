@@ -387,7 +387,7 @@
               <h3>자유게시판 작성하기</h3>
             </div>
             <form name="writeFrm" method="post" enctype="multipart/form-data"
-      			action="../freeboard/edit.do" onsubmit="return validateForm(this);">
+      			action="../databoard/edit.do" onsubmit="return validateForm(this);">
             <input type="hidden" name="idx" value="${ dto.idx }" />
             <input type="hidden" name="prevOfile" value="${ dto.ofile }" />
 			<input type="hidden" name="prevSfile" value="${ dto.sfile }" />
@@ -419,7 +419,7 @@
             
             <div class="btn_wrap">
               <button type="submit" class="write_btn" >수정하기</button>
-              <button type="button" class="back_btn" onclick="location.href='../freeboard/list.do';">등록취소</button>
+              <button type="button" class="back_btn" onclick="location.href='../databoard/list.do';">등록취소</button>
             </div>
             </form>
           </div>

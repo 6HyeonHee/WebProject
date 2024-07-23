@@ -1,7 +1,7 @@
 
-<%@page import="freeboard.FreeBoardDTO"%>
+<%@page import="databoard.DataBoardDTO"%>
 <%@page import="utils.CookieManager"%>
-<%@page import="freeboard.FreeBoardDAO"%>
+<%@page import="databoard.DataBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -10,7 +10,7 @@
 // 파라미터로 전달된 게시물의 일련번호를 받아온다.
 String idx = request.getParameter("idx");
 // DAO 인스턴스 생성
-FreeBoardDAO dao = new FreeBoardDAO();
+DataBoardDAO dao = new DataBoardDAO();
 
 String ckValue = CookieManager.readCookie(request, "board-"+ idx);
 if(!ckValue.equals("read")) {
@@ -20,7 +20,7 @@ if(!ckValue.equals("read")) {
 
 
 // 출력할 게시물 인출
-FreeBoardDTO dto = dao.selectView(idx);
+DataBoardDTO dto = dao.selectView(idx);
 // DB 연결 해제
 dao.close();
 %>
@@ -35,7 +35,7 @@ function deletePost() {
      var form = document.writeFrm;
 
      form.method = "post"; 
-     form.action = "../freeboard/delete.do"; 
+     form.action = "../databoard/delete.do"; 
      form.submit();
  }
 }
@@ -416,7 +416,6 @@ function deletePost() {
                 ${ dto.content }
                 <c:if test="${ not empty dto.ofile }">
                 	<br /><br /><br />
-                	${ ext }
 					<c:choose>
 						<c:when test='${ ext == ".png" or ext == ".gif" or ext == ".jpg" }'>
 							<img src="../binggrae/Uploads/${ dto.sfile }" style="max-width:600px;" />
@@ -439,7 +438,7 @@ function deletePost() {
               	<!-- 글 작성시 첨부파일은 필수사항이 아니므로 첨부한 경우에만 다운로드 링크를 화면에 출력한다. -->
 <c:if test="${ not empty dto.ofile }">
 	${ dto.ofile }
-	<a href="../freeboard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
+	<a href="../databoard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
 	    [다운로드]
 	</a>
 </c:if>
@@ -455,7 +454,7 @@ function deletePost() {
 %>
 <c:if test="${ UserId != null && UserId != '' && UserId == dto.id }">
         <button type="button" class="content_btn"
-            onclick="location.href='../freeboard/edit.do?mode=edit&idx=${param.idx}';">
+            onclick="location.href='../databoard/edit.do?mode=edit&idx=${param.idx}';">
             수정하기
         </button>
         <button type="button" class="content_btn"
@@ -463,7 +462,7 @@ function deletePost() {
             삭제하기
         </button>
 </c:if>
-              <a class="point_btn3" href="../freeboard/list.do">목록</a>
+              <a class="point_btn3" href="../databoard/list.do">목록</a>
             </div>
           </div>
         </div>

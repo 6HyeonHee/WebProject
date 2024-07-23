@@ -15,8 +15,8 @@ import utils.JSFunction2;
 // 요청명에 대한 매핑과 첨부파일 제한 용량에 대한 설정
 @WebServlet("/databoard/edit.do")
 @MultipartConfig (
-	maxFileSize = 1024 * 1024 * 5,
-	maxRequestSize = 1024 * 1024 * 50
+	maxFileSize = 1024 * 1024 * 50,
+	maxRequestSize = 1024 * 1024 * 500
 )
 public class DataEditCtrl extends HttpServlet {
 

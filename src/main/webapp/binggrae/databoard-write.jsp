@@ -387,7 +387,7 @@
               <h3>자유게시판 작성하기</h3>
             </div>
             <form name="writeFrm" method="post" enctype="multipart/form-data"
-      			action="../freeboard/write.do" onsubmit="return validateForm(this);">
+      			action="../databoard/write.do" onsubmit="return validateForm(this);">
             <div class="board_box">
               <div class="board_write_wrap ">
                 <table>
@@ -416,7 +416,7 @@
             
             <div class="btn_wrap">
               <button type="submit" class="write_btn" >등록하기</button>
-              <button type="button" class="back_btn" onclick="location.href='../freeboard/list.do';">등록취소</button>
+              <button type="button" class="back_btn" onclick="location.href='../databoard/list.do';">등록취소</button>
             </div>
             </form>
           </div>

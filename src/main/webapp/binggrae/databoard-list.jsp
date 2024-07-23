@@ -407,7 +407,7 @@
               <tbody>
 <!-- 검색어 조건에 따라 게시물이 있는지 확인하기 위해 choose태그 사용 -->
 <c:choose>
-	<c:when test="${ empty freeboardLists }">
+	<c:when test="${ empty databoardLists }">
 		<!-- List에 저장된 레코드가 없는 경우 -->
 		<tr>
             <td colspan="6" align="center">
@@ -419,14 +419,14 @@
 		<!-- 저장된 게시물이 있다면 갯수만큼 반복해서 출력한다. 
 		items 속성에는 반복가능한 객체를 기술하고, 순서대로 추출된 데이터는
 		var 속성에 지정한 변수로 저장된다.-->           
-		<c:forEach items="${ freeboardLists }" var="row" varStatus="loop">
+		<c:forEach items="${ databoardLists }" var="row" varStatus="loop">
         <tr align="center">
         	<!-- 가상 번호 -->
             <td> 
 				${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }
 			</td>
             <td align="left">
-                <a href="../freeboard/view.do?idx=${ row.idx }">
+                <a href="../databoard/view.do?idx=${ row.idx }">
                 	${ row.title } </a>
             </td> 
             <td>${ row.id }</td>
@@ -435,7 +435,7 @@
             <td>
             <!-- 다운로드 링크는 첨부파일이 있을 떄만 표시한다. -->
             <c:if test="${ not empty row.ofile }">
-            	<a href="../freeboard/download.do?ofile=${ row.ofile }
+            	<a href="../databoard/download.do?ofile=${ row.ofile }
             	&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
             </c:if>
             </td>
@@ -447,7 +447,7 @@
             </table>
           </div>
           <div class="board_write_btn">
-            <a href="../freeboard/write.do">글쓰기</a>
+            <a href="../databoard/write.do">글쓰기</a>
           </div>
           <div class="board_pagination">
             <div class="pagination_wrap">
