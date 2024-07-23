@@ -35,14 +35,15 @@
   	<param-value>1234</param-value>
   </context-param>
   
-    <!-- 서블렛에서 직접 내용 출력하기 (JSP를 사용하지 않음) -->
-  <servlet>
-  	<servlet-name>DirectServletPrint</servlet-name>
-  	<servlet-class>servlet.DirectServletPrint</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>DirectServletPrint</servlet-name>
-  	<url-pattern>/Servlet/DirectServletPrint.do</url-pattern>
-  </servlet-mapping>
+  <!-- 1. 한페이지에 출력할 게시물의 갯수 설정 -->
+  <context-param>
+     <param-name>POSTS_PER_PAGE</param-name>
+     <param-value>15</param-value>
+  </context-param>
+  <!-- 2. 한 블럭당 출력할 페이지 번호의 갯수 설정 -->
+  <context-param>
+     <param-name>PAGES_PER_BLOCK</param-name>
+     <param-value>5</param-value>
+  </context-param>
   
 </web-app>

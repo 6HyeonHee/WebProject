@@ -763,10 +763,18 @@ caption.nohead {
   border-radius: 20px 0 0 20px;
 }
 .board_list .col3 {
-  width:27%;
+  width:20%;
 }
 .board_list .col4 {
-  width: 18%;
+  width: 12%;
+  border-radius: 0 20px 20px 0;
+}
+.board_list .col5 {
+  width: 15%;
+  border-radius: 0 20px 20px 0;
+}
+.board_list .col6 {
+  width: 15%;
   border-radius: 0 20px 20px 0;
 }
 
@@ -810,7 +818,7 @@ caption.nohead {
 
 /* 게시물 보기 */
 .board_box {
-  padding: 25px 30px 0;
+  padding: 25px;
   border: 1px solid rgba(224, 223, 226, 0.6);
   border-radius: 30px;
 }
@@ -839,7 +847,7 @@ caption.nohead {
 }
 .board_view .view_con {
   min-height: 440px;
-  padding-bottom: 20px;
+  padding: 30px;
   word-wrap: break-word;
   word-break: break-all;
 }
@@ -870,11 +878,31 @@ caption.nohead {
   top: 50%;
   transform: translateY(-50%);
 }
-
-.board_view .point_btn3 {
-  display: flex;
+.board_view .btn_wrap {
+	display: flex;
+}
+.board_view .content_btn {
   width: 160px;
   height: 43px;
+  display: flex;
+  font-size: 14px;
+  border-radius: 22px;
+  border: solid 1px rgba(224, 223, 226, 0.6);
+  margin: 40px auto 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.board_view .content_btn:hover {
+  background: linear-gradient(to top, #ed1c24, #e0462e);
+  box-shadow: inset 0px 5px 10px 0 rgba(121, 121, 121, 0.03);
+  color: #fff;
+}
+.board_view .point_btn3 {
+  width: 160px;
+  height: 43px;
+  display: flex;
   font-size: 14px;
   border-radius: 22px;
   border: solid 1px rgba(224, 223, 226, 0.6);
@@ -1103,21 +1131,27 @@ caption.nohead {
   line-height: 30px;
 }
 
-.board_write .btn_wrap {
+ .board_write .btn_wrap {
   padding-top: 40px;
   text-align: center;
 }
-.board_write .btn_wrap a {
+.board_write .btn_wrap .write_btn {
   display: inline-block;
   width: 160px;
   line-height: 40px;
+  border: none;
   border-radius: 20px;
   background: linear-gradient(#ed1c24, #e0462e);
   color: #fff;
   font-size: 20px;
   box-shadow: inset 0px 5px 10px 0 rgba(53, 53, 53, 0.11);
 }
-.board_write .btn_wrap a:nth-child(2) {
+.board_write .btn_wrap .back_btn {
+  display: inline-block;
+  width: 160px;
+  line-height: 40px;
+  border: none;
+  border-radius: 20px;
   background: #f9f9f9;
   color: var(--gray-600);
   box-shadow: inset 0px 5px 10px 0 rgba(121, 121, 121, 0.03);
@@ -1177,7 +1211,7 @@ caption.nohead {
     width: 100px;
     font-size: 16px;
   }
-  .file_wrap a {
+  .file_wrap input {
     width: 90px;
     font-size: 15px;
   }

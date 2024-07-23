@@ -122,7 +122,7 @@
                   <li><a href="#">재무정보</a></li>
                   <li><a href="#">주식정보</a></li>
                   <li><a href="invest-aanouce-list.jsp">전자공고</a></li>
-                  <li><a href="#">공시정보</a></li>
+                  <li><a href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="#">IR자료실</a></li>
                 </ul>
               </li>
@@ -273,7 +273,7 @@
                   <li><a href="#">재무정보</a><span class="circle"></span></li>
                   <li><a href="#">주식정보</a><span class="circle"></span></li>
                   <li><a href="invest-aanouce-list.jsp">전자공고</a><span class="circle"></span></li>
-                  <li><a href="#">공시정보</a></li>
+                  <li><a href="../freeboard/list.do">공시정보</a></li>
                   <li><a href="#">IR자료실</a><span class="circle"></span></li>
                 </ul>
               </li>
@@ -360,7 +360,7 @@
                 <li><a href="#">재무정보</a></li>
                 <li><a href="#">주식정보</a></li>
                 <li><a href="invest-aanouce-list.jsp">전자공고</a></li>
-                <li><a href="#">공시정보</a></li>
+                <li><a href="../freeboard/list.do">공시정보</a></li>
                 <li><a href="#">IR자료실</a></li>
               </ul>
             </li>
